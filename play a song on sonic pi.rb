@@ -1,3 +1,4 @@
+#whats up
 #PLAY A SONG ON SONIC PI
 #Next note higher or equal to the base note note n that is in the chord c
 define :next_note do |n, c|
