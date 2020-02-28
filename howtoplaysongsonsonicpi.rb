@@ -1,4 +1,4 @@
-#Next note higher or equal
+#next note higher or equal
 #to the base note note n
 #that is in the chord c
 define :next_note do |n, c|
@@ -120,3 +120,23 @@ define :tune do |tone, name, tuning=tune_key|
       :e, :a, :a, :b], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
       sleep 0.5
   end
+  1.times do
+      intro
+  end
+  1.times do
+      verse
+  end
+  sleep 0.5
+  2.times do
+      chorus
+      sleep 0.5
+      play :a4, amp: 0.1
+      sleep 0.5
+  end
+  sleep 0.5
+  2.times do
+      verse
+  end
+  #  2.times do
+  #   instr
+  #  end
