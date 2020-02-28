@@ -1,4 +1,4 @@
-# Loading previous buffer contents. Please wait...
+
 #next note higher or equal to the base note note n that is in the chord c
 define :next_note do |n, c|
     n = note(n)
