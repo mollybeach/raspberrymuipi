@@ -4,7 +4,7 @@
 define :next_note do |n, c|
   n = note(n)
   #gets distances to each note in chord,
-  #Add smallest to the base note
+  #add smallest to the base note
   n + (c.map {|x| (note(x) - n) % 12}).min
 end
 #enter your key here:
