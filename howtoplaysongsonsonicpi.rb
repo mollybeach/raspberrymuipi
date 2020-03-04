@@ -59,9 +59,8 @@ use_bpm 70
 #enter your chords here
 #change original key note chords by using
 #:M, :m, :e7, :a6, (:a, invert: -1), (:c, :dim)
-#use play before ring to play once and play_pattern
-#before ring to play pattern
-#change octave at different sections by redefining octave
+#use play_pattern before ring to play pattern vs play through once
+#change octave at different sections by redefining octave within that section
 #redefine octave at particular chords using invert: 2, 3, -1 etc.
 define :intro do
   puts melody
@@ -73,7 +72,7 @@ define :intro do
 end
 define :verse do
   puts "verse playing"
-  play ring((tune :e7, :m), (tune :e, :M), (tune :e, :m7), (tune :e, :M),
+  ring((tune :e7, :m), (tune :e, :M), (tune :e, :m7), (tune :e, :M),
             (tune :e, :M), (tune :e, :M), (tune :c, :M), (tune :a, :M), (tune :gs, :M))
   sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/4
   sample :guit_e_fifths, decay: 0.5, amp: 0.1, rate: -1
@@ -84,14 +83,14 @@ define :verse do
 end
 define :chorus do
   puts "chorus playing"
-  play ring((tune :e, :M), (tune :e, :m), (tune :e, :M), (tune :e, :M),
+  ring((tune :e, :M), (tune :e, :m), (tune :e, :M), (tune :e, :M),
             (tune :c, :M), (tune :a, :m), (tune :g, :M), (tune :c, :M))
   sample :loop_tabla, rate: sample_duration(:loop_tabla)/8
   sample :perc_snap
 end
 define :bridge do
   puts "bridge playing"
-  play ring((tune :c, :M),(tune :a, :M), (tune :g, :M), (tune :e, :M),
+  ring((tune :c, :M),(tune :a, :M), (tune :g, :M), (tune :e, :M),
   (tune :c, :M), (tune :e, :M), (tune :a, :M), (tune :g, :M))
   sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/2
   sample :drum_bass_soft
@@ -111,7 +110,7 @@ define :melody do
     #with_fx :ixi_techno do
     use_synth_defaults attack: 0.0625, slide: 0.0625, depth: 1.5, amp: 1.1, amp_slide: 0.5,cutoff: 40, oom: 0.9, rate: 10
     #enter single note patterns here
-    play ring(:f, :a, :g, :b, :b, :a, :a, :g, :e, :e, :g,
+    ring(:f, :a, :g, :b, :b, :a, :a, :g, :e, :e, :g,
               :g, :b, :b, :d, :d, :c, :c, :e,
               :e, :a, :a, :b)
     #end
