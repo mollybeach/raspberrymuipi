@@ -1,4 +1,5 @@
 #how to play a song on sonic pi
+#guitar, piano, etc
 #base notes
 key = [:a, :b, :c, :d, :e, :f, :g]
 #choose a scale from below
@@ -23,7 +24,7 @@ octave = 3
 #enter your scale in tune key
 tune_key = b_major.map! do |value| "#{value}#{octave}"
 end
-#prints out scale
+#prints out scale to console
 puts tune_key
 #next note higher or equal
 #to the base note note n
@@ -46,7 +47,7 @@ define :tune do |tune, name, tuning=tune_key|
   end
   c
 end
-# input your delay between plays of chords
+# input delay between plays of chords
 define :preform do |c, d=0.1|
   in_thread do
     play_pattern_timed c.drop_while{|n| [nil,:r].include? n}, d
@@ -56,10 +57,12 @@ use_debug false
 #beats per minute
 use_bpm 70
 #enter your chords here
-#change original key note chords by using :M, :m, :e7, :a6, (:a, invert: -1), (:c, :dim)
-#use play before ring to play once and play_pattern before ring to play pattern
+#change original key note chords by using
+#:M, :m, :e7, :a6, (:a, invert: -1), (:c, :dim)
+#use play before ring to play once and play_pattern
+#before ring to play pattern
 #change octave at different sections by redefining octave
-#redefine octave at particular chords use invert: 2, 3, -1 etc.
+#redefine octave at particular chords using invert: 2, 3, -1 etc.
 define :intro do
   puts melody
   melody
@@ -114,7 +117,9 @@ define :melody do
     #end
   end
 end
+#loop a pattern throughout song
 live_loop :tech do
+puts "loop playing"
   sleep 16
   with_fx :ixi_techno, phase: 32, res: 0.9, cutoff_min: 0, cutoff_max: 129 do
     64.times do
@@ -144,7 +149,8 @@ define :song do
   with_fx :pan do
     #with_fx :ixi_techno, cutoff: 40, oom: 0.9, amp: 0.5 do
     use_synth_defaults attack: 0.0625, slide: 0.0625, depth: 1.5, amp: 1.5, amp_slide: 0.5,cutoff: 40, oom: 0.9
-    #enter your instrument here:
+    #enter instrument for the chords here
+    #piano, pluck etc.
     with_synth :pluck do
       tick
       #define strumming pattern
