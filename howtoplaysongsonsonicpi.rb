@@ -2,6 +2,7 @@
 #guitar, piano, etc
 #base notes
 key = [:a, :b, :c, :d, :e, :f, :g]
+personalized_key = [:e2, :a2, :d3, :g3, :b3, :e4]
 #choose a scale from below
 #major scales
 c_major = key
@@ -22,8 +23,10 @@ f_minor = c_minor.map{|x| x === :d ? "#{x}b": x}
 #enter your octave
 octave = 3
 #enter your scale in tune key
-tune_key = b_major.map! do |value| "#{value}#{octave}"
+tune_key = a_major.map! do |value| "#{value}#{octave}"
 end
+#or enter personalized key and use
+#tune_key = personalized_key
 #prints out scale to console
 puts tune_key
 #next note higher or equal
@@ -57,51 +60,104 @@ use_debug false
 #beats per minute
 use_bpm 70
 #enter your chords here
+#8 chords per section/ personalize
 #change original key note chords by using
-#:M, :m, :e7, :a6, (:a, invert: -1), (:c, :dim)
+#:M, :m, (:e, '7'), (:e,  m7), :a6, (:a, invert: -1), (:c, :dim)
 #use play_pattern before ring to play pattern vs play through once
 #change octave at different sections by redefining octave within that section
 #redefine octave at particular chords using invert: 2, 3, -1 etc.
+#run single note patterns with your code rings
+#using either letter defintions within the preset key using (ring :b, :c, :d, :e, :fs, :g, :a, :b)
+#or use note numbers (ring 65, 60, ,57, 53, 57, 60, 65)
+#and/or use rings within the single note patterns (ring :r, :r, 53, 57, 60, 65)
 define :intro do
+  sample :tabla_ghe3
+  sleep 0.5
+  sample :tabla_ghe3
+  sleep 0.5
   puts melody
-  melody
+  sleep 0.5
+  #melody
   puts "intro playing"
-  octave = 4
-  play_pattern ring((tune :c, :M), (tune :a, :M), (tune :g, :M), (tune :c, :M))
-  #(tune :c, :M), (tune :a, :m), (tune :g, :M), (tune :c, :M))
+  octave = 2
+  ring((tune :c, :m), (tune :g, :M), (tune :g, :M), (tune :c, :M),
+       (tune :b, :m), (tune :b, :M), (tune :e, :m), (tune :d, :M))
 end
 define :verse do
   puts "verse playing"
-  ring((tune :e7, :m), (tune :e, :M), (tune :e, :m7), (tune :e, :M),
-            (tune :e, :M), (tune :e, :M), (tune :c, :M), (tune :a, :M), (tune :gs, :M))
-  sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/4
-  sample :guit_e_fifths, decay: 0.5, amp: 0.1, rate: -1
-  sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/2
-  sample :perc_snap
+  ring((tune :a, :m), (tune :c, :M), (tune :g, :M), (tune :b, :m), (tune :e, :m),
+       (tune :D, :M), (tune :a, :m), (tune :c, :M), (tune :g, :M))
   sleep 0.5
-  sample :perc_snap
+  sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/4
+  sleep 0.5
+  sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/2
+  sample :tabla_ghe3
+  sleep 0.5
+  sample :tabla_ghe3
+  sleep 0.5
+  sample :tabla_ghe3
+  sleep 0.5
 end
 define :chorus do
   puts "chorus playing"
-  ring((tune :e, :M), (tune :e, :m), (tune :e, :M), (tune :e, :M),
-            (tune :c, :M), (tune :a, :m), (tune :g, :M), (tune :c, :M))
+  ring((tune :b, :m), (tune :e, :m), (tune :d, :M), (tune :a, :m),
+       (tune :c, :M), (tune :c, :m), (tune :g, :M), (tune :b, :m))
   sample :loop_tabla, rate: sample_duration(:loop_tabla)/8
   sample :perc_snap
+  sleep 0.5
+  sample :perc_snap
+  sleep 0.5
+  sample :tabla_na_s
 end
-define :bridge do
-  puts "bridge playing"
-  ring((tune :c, :M),(tune :a, :M), (tune :g, :M), (tune :e, :M),
-  (tune :c, :M), (tune :e, :M), (tune :a, :M), (tune :g, :M))
+define :instr do
+  puts "outro playing"
+  sleep 0.5
+  ring((tune :g, :m), (tune :b, :m7), (tune :e, :m), (tune :d, :M),
+       (tune :a, :m), (tune :c, :M), (tune :g, :m), (tune :b, :m))
+ sleep 0.5
+ sample :tabla_ghe8
+ sleep 0.5
+ sample :tabla_ke1
+ sleep 0.5
+ sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/2
+  sleep 0.5
   sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/2
+ sleep 0.5
+end
+define :verse2 do
+  puts "verse2 playing"
+  ring((tune :e, :m),(tune :d, :M), (tune :a, :m), (tune :c, :M),
+       (tune :g, :M), (tune :b, :m), (tune :e, :m), (tune :D, :M))
+  sleep 0.5
+  sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/2
+  sleep 0.5
+  sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/2
+  sleep 0.5
   sample :drum_bass_soft
+  sleep 0.5
   sample :drum_cymbal_pedal
   sleep 0.5
 end
+define :bridge do
+  #sample :elec_soft_kick
+  puts "bridge playing"
+  sleep 0.5
+  sample :tabla_te_ne
+  sleep 0.5
+  ring((tune :a, :m), (tune :c, :M), (tune :g, :M), (tune :b, :m),
+       (tune :e, :m), (tune :d, :M), (tune :a, :m), (tune :c, :M))
+  sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/2
+  sleep 0.5
+end
 define :outro do
-  sample :elec_soft_kick
+  sample :loop_tabla, rate: sample_duration(:loop_tabla)/8
+  sleep  0.5
+  with_synth :dark_ambience do
+  use_synth_defaults amp: 0.01
   puts "outro playing"
-  ring((tune :c, :M), (tune :a, invert: -1), (tune :g, :M), (tune :c, :M),
+  ring((tune :c, :M), (tune :a, :m), (tune :g, :M), (tune :c, :M),
        (tune :c, :M), (tune :a, :M), (tune :g, :M), (tune :c, :M))
+  end
 end
 define :melody do
   puts "melody playing"
@@ -111,18 +167,18 @@ define :melody do
     use_synth_defaults attack: 0.0625, slide: 0.0625, depth: 1.5, amp: 1.1, amp_slide: 0.5,cutoff: 40, oom: 0.9, rate: 10
     #enter single note patterns here
     ring(:f, :a, :g, :b, :b, :a, :a, :g, :e, :e, :g,
-              :g, :b, :b, :d, :d, :c, :c, :e,
-              :e, :a, :a, :b)
+         :g, :b, :b, :d, :d, :c, :c, :e,
+         :e, :a, :a, :b)
     #end
   end
 end
 #loop a pattern throughout song
 live_loop :tech do
-puts "loop playing"
+  puts "loop playing"
   sleep 16
-  with_fx :ixi_techno, phase: 32, res: 0.9, cutoff_min: 0, cutoff_max: 129 do
+  with_fx :ixi_techno, phase: 32, res: 0.9, cutoff_min: 0, cutoff_max: 129, amp: 0.5 do
     64.times do
-      sample :sn_dolf, amp: 0.2, start: 0.1, finish: 0.4
+      sample :sn_dolf, amp: 0.1, start: 0.1, finish: 0.4
       sleep 0.25
     end
   end
@@ -132,7 +188,11 @@ define :chords do
   intro
   verse
   chorus
+  verse2
+  instr
   bridge
+  verse2
+  verse2
   outro
 end
 #enter strumming patterns for song sections
@@ -141,7 +201,7 @@ define :strumming_str do
   verse = "U.DD.DDD"
   chorus = "DDU.UUUD"
   bridge ="UUD.UUDU"
-  outro = "UUU.UDUU"
+  outro = "UDU.UDDU"
 end
 define :song do
   #modify your sound with with_fx here
