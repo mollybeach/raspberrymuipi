@@ -1,14 +1,7 @@
-#next note higher or equal
-#to the base note note n
-#that is in the chord c
-define :next_note do |n, c|
-  n = note(n)
-  #gets distances to each note in chord,
-  #add smallest to the base note
-  n + (c.map {|x| (note(x) - n) % 12}).min
-end
-#enter your key here
+#how to play a song on sonic pi
+#base notes
 key = [:a, :b, :c, :d, :e, :f, :g]
+#choose a scale from below
 #major scales
 c_major = key
 f_major = key.map{|x| x === :b ? "#{x}b": x}
@@ -30,8 +23,17 @@ octave = 3
 #enter your scale in tune key
 tune_key = f_minor.map! do |value| "#{value}#{octave}"
 end
-#prints out your scale
+#prints out scale
 puts tune_key
+#next note higher or equal
+#to the base note note n
+#that is in the chord c
+define :next_note do |n, c|
+  n = note(n)
+  #gets distances to each note in chord,
+  #add smallest to the base note
+  n + (c.map {|x| (note(x) - n) % 12}).min
+end
 #returns ring representing the chord
 define :tune do |tune, name, tuning=tune_key|
   chrd = (chord tune, name)
@@ -52,15 +54,13 @@ define :preform do |c, d=0.3|
 end
 use_debug false
 use_bpm 70
-
-#enter your chords here:
+#enter chords here:
 define :intro do
   puts melody
   melody
   puts "intro playing"
   play_pattern ring((tune :c, :M), (tune :a, :m), (tune :g, :M), (tune :c, :M))
   #(tune :c, :M), (tune :a, :m), (tune :g, :M), (tune :c, :M))
-
 end
 define :verse do
   puts "verse playing"
@@ -68,7 +68,6 @@ define :verse do
             (tune :e, :M), (tune :e, :M), (tune :c, :M), (tune :a, :M), (tune :gs, :M))
   sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/4
   sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/2
-
 end
 define :chorus do
   play ring((tune :e, :M), (tune :e, :m), (tune :e, :M), (tune :e, :M),
@@ -108,25 +107,25 @@ define :chords do
   verse
   chorus
   bridge
-  chorus
   outro
 end
+#enter strumming patterns for song sections
 define :strumming_str do
   intro = "DDU.U.D.UU.DD."
   verse = "DDU.U.DD.DUU.DD."
   chorus = "DDU.U.DD.DUU.DD."
-  bridge ="UUUUUUUUUUUU."
+  bridge ="UUDUUUUDUUU."
   outro = "UUU.U.DD.UUD."
 end
-
 define :song do
   #modify your sound with with_fx here
   #with_fx :reverb do
   #with_fx :ixi_techno, cutoff: 40, oom: 0.9, amp: 0.5 do
-  #use_synth_defaults attack: 0.0625, slide: 0.0625, depth: 1.5, amp: 1.5, amp_slide: 3
+  use_synth_defaults attack: 0.0625, slide: 0.0625, depth: 1.5, amp: 1.5, amp_slide: 3
   #enter your instrument here:
   with_synth :pluck do
     tick
+    #define strumming pattern
     strumming_str.split(//).each do |s|
       if s == 'D' # Down stroke
         preform chords.look, 0.5
