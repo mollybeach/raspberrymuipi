@@ -21,7 +21,7 @@ f_minor = c_minor.map{|x| x === :d ? "#{x}b": x}
 #enter your octave
 octave = 3
 #enter your scale in tune key
-tune_key = f_minor.map! do |value| "#{value}#{octave}"
+tune_key = b_major.map! do |value| "#{value}#{octave}"
 end
 #prints out scale
 puts tune_key
@@ -47,33 +47,44 @@ define :tune do |tune, name, tuning=tune_key|
   c
 end
 # input your delay between plays of chords
-define :preform do |c, d=0.3|
+define :preform do |c, d=0.1|
   in_thread do
     play_pattern_timed c.drop_while{|n| [nil,:r].include? n}, d
   end
 end
 use_debug false
+#beats per minute
 use_bpm 70
-#enter chords here:
+#enter your chords here
+#change original key note chords by using :M, :m, :e7, :a6, (:a, invert: -1), (:c, :dim)
+#use play before ring to play once and play_pattern before ring to play pattern
+#change octave at different sections by redefining octave
+#redefine octave at particular chords use invert: 2, 3, -1 etc.
 define :intro do
   puts melody
   melody
   puts "intro playing"
-  play_pattern ring((tune :c, :M), (tune :a, :m), (tune :g, :M), (tune :c, :M))
+  octave = 4
+  play_pattern ring((tune :c, :M), (tune :a, :M), (tune :g, :M), (tune :c, :M))
   #(tune :c, :M), (tune :a, :m), (tune :g, :M), (tune :c, :M))
 end
 define :verse do
   puts "verse playing"
-  play ring((tune :e, :m7), (tune :e, :M), (tune :e, :m7), (tune :e, :M),
+  play ring((tune :e7, :m), (tune :e, :M), (tune :e, :m7), (tune :e, :M),
             (tune :e, :M), (tune :e, :M), (tune :c, :M), (tune :a, :M), (tune :gs, :M))
   sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/4
+  sample :guit_e_fifths, decay: 0.5, amp: 0.1, rate: -1
   sample :loop_breakbeat, rate: sample_duration(:loop_breakbeat)/2
+  sample :perc_snap
+  sleep 0.5
+  sample :perc_snap
 end
 define :chorus do
+  puts "chorus playing"
   play ring((tune :e, :M), (tune :e, :m), (tune :e, :M), (tune :e, :M),
             (tune :c, :M), (tune :a, :m), (tune :g, :M), (tune :c, :M))
   sample :loop_tabla, rate: sample_duration(:loop_tabla)/8
-  puts "chorus playing"
+  sample :perc_snap
 end
 define :bridge do
   puts "bridge playing"
@@ -87,17 +98,28 @@ end
 define :outro do
   sample :elec_soft_kick
   puts "outro playing"
-  ring((tune :c, :M), (tune :a, :m), (tune :g, :M), (tune :c, :M),
-       (tune :c, :M), (tune :a, :m), (tune :g, :M), (tune :c, :M))
+  ring((tune :c, :M), (tune :a, invert: -1), (tune :g, :M), (tune :c, :M),
+       (tune :c, :M), (tune :a, :M), (tune :g, :M), (tune :c, :M))
 end
 define :melody do
   puts "melody playing"
+  octave = 5
   with_synth :fm do
-    with_fx :lpf do
-      #enter single note patterns here
-      ring(:f, :a, :g, :b, :b, :a, :a, :g, :e, :e, :g,
-           :g, :b, :b, :d, :d, :c, :c, :e,
-           :e, :a, :a, :b)
+    #with_fx :ixi_techno do
+    use_synth_defaults attack: 0.0625, slide: 0.0625, depth: 1.5, amp: 1.1, amp_slide: 0.5,cutoff: 40, oom: 0.9, rate: 10
+    #enter single note patterns here
+    play ring(:f, :a, :g, :b, :b, :a, :a, :g, :e, :e, :g,
+              :g, :b, :b, :d, :d, :c, :c, :e,
+              :e, :a, :a, :b)
+    #end
+  end
+end
+live_loop :tech do
+  sleep 16
+  with_fx :ixi_techno, phase: 32, res: 0.9, cutoff_min: 0, cutoff_max: 129 do
+    64.times do
+      sample :sn_dolf, amp: 0.2, start: 0.1, finish: 0.4
+      sleep 0.25
     end
   end
 end
@@ -111,33 +133,33 @@ define :chords do
 end
 #enter strumming patterns for song sections
 define :strumming_str do
-  intro = "DDU.U.D.UU.DD."
-  verse = "DDU.U.DD.DUU.DD."
-  chorus = "DDU.U.DD.DUU.DD."
-  bridge ="UUDUUUUDUUU."
-  outro = "UUU.U.DD.UUD."
+  intro = "DDU.U.U.D."
+  verse = "U.DD.DDD"
+  chorus = "DDU.UUUD"
+  bridge ="UUD.UUDU"
+  outro = "UUU.UDUU"
 end
 define :song do
   #modify your sound with with_fx here
-  #with_fx :reverb do
-  #with_fx :ixi_techno, cutoff: 40, oom: 0.9, amp: 0.5 do
-  use_synth_defaults attack: 0.0625, slide: 0.0625, depth: 1.5, amp: 1.5, amp_slide: 3
-  #enter your instrument here:
-  with_synth :pluck do
-    tick
-    #define strumming pattern
-    strumming_str.split(//).each do |s|
-      if s == 'D' # Down stroke
-        preform chords.look, 0.5
-      elsif s == 'U' # Up stroke
-        with_fx :level, amp: 0.5 do
-          preform chords.look.reverse, 0.03
+  with_fx :pan do
+    #with_fx :ixi_techno, cutoff: 40, oom: 0.9, amp: 0.5 do
+    use_synth_defaults attack: 0.0625, slide: 0.0625, depth: 1.5, amp: 1.5, amp_slide: 0.5,cutoff: 40, oom: 0.9
+    #enter your instrument here:
+    with_synth :pluck do
+      tick
+      #define strumming pattern
+      strumming_str.split(//).each do |s|
+        if s == 'D' # Down stroke
+          preform chords.look, 0.5
+        elsif s == 'U' # Up stroke
+          with_fx :level, amp: 0.5 do
+            preform chords.look.reverse, 0.03
+          end
         end
+        sleep 0.5
       end
-      sleep 0.5
     end
+    #end
   end
-  #end
-  #end
 end
 song
