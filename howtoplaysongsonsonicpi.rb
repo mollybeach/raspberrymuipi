@@ -77,7 +77,7 @@ define :intro do
   sleep 0.5
   puts melody
   sleep 0.5
-  #melody
+  melody
   puts "intro playing"
   octave = 2
   ring((tune :c, :m), (tune :g, :M), (tune :g, :M), (tune :c, :M),
