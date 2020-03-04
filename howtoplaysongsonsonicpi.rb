@@ -58,7 +58,7 @@ define :preform do |c, d=0.1|
 end
 use_debug false
 #beats per minute
-use_bpm 70
+use_bpm 90
 #enter your chords here
 #8 chords per section/ personalize
 #change original key note chords by using
