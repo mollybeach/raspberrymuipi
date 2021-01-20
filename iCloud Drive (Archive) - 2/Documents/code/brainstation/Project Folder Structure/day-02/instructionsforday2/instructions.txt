@@ -1,0 +1,35 @@
+2. Coffee Shop: Separation of Concerns
+Now equipped with the skill to separate files and build folder structures, update your project folder to contain the following structure:
+
+firstname-lastname-coffeeshop
+index.html
+assets folder
+All assets are to be placed inside this folder
+pages folder
+menu.html
+css folder
+main.css (This should correspond to the Landing Page)
+menu.css (This should correspond to the Menu)
+This can also be represented visually as seen below: Folder Structure
+
+Once you have created the following structure, be sure to link each stylesheet to its corresponding HTML file using the <link> tag. You’re now ready to add-in your CSS!
+
+3. Coffee Shop: Styling the Menu
+So far, we have created the basic site structure for our client’s menu. To properly represent the brand and attract customers, we need to add some visual design elements.
+
+With your knowledge of basic CSS properties and paths, use this mockup, style guide, and assets package provided to create the following menu design. Please note that the assets package contains all of the images needed for the site which will be implemented across future exercises.
+
+You are required to add all of the necessary images for this page (in their appropriate HTML section), as well as style the page according to the mockup presented. All necessary styling details can be found in the style guide. Additionally, to be able to properly position the hero image, use CSS to add the image.
+
+Some properties you may need to research:
+
+background-image
+background-position
+background-size
+text-align
+text-decoration
+list-style-type
+Before getting started, let’s copy over the previous day’s work into our ‘Day 2’ folder.
+
+Note: You may need to modify your HTML document in order to meet the design requirements
+

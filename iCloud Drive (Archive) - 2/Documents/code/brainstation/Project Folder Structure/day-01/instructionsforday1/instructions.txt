@@ -1,0 +1,98 @@
+1. Coffee Shop: Exercise Overview
+As you begin your web development journey, a digital agency has brought you on as a developer intern. They are looking to help you learn and grow, and want your help on a simple client project. In this scenario, the client is a new local coffee shop set to launch soon. Before they open to the public, they’re looking to create a digital presence and drive awareness through the use of a website.
+Specifically, your task over the next two weeks will be to build a multi-page website for them. To assist you in the building process, the project has been segmented into individual exercises to focus on core learnings from daily lectures.
+Equipped with all of the necessary design resources (provided to you as needed), your task is to build upon and complete all daily exercises. It is important that you complete all the daily Coffee Shop exercises given the incremental progression of this project and the need to submit your work as seen below.
+The project is broken down into two main pages: a Landing Page, and a Menu. The Landing Page is the main page for the site and is where visitors can access basic information. The menu page will provide further details about the coffee shop’s offerings.
+
+Submission
+You will have two deliverables for the Coffee Shop website:
+
+Week 1: Sunday by 11:59pm
+Week 2: Sunday by 11:59pm
+All submissions can be done through the Synapse Projects tab.
+
+Folder Structure
+Download the following folder structure. Inside are folders to store your work from each day. There are basic files in the Day 1 folder for each of our main pages (the Landing Page and Menu). Please complete today’s work using those documents as they contain some important code necessary for the project.
+Before proceeding with your new exercises on the following day, it’s recommended that you make a copy of the HTML and CSS files from the previous day. This will give you a reference point to work from and eliminate the need for you to redo all of the previous exercises if you make a mistake.
+Next Steps
+As the project develops over the next two weeks, you’ll be provided with updated resources as necessary to ensure that the day’s requirements can be met. These resources specifically include the following:
+
+Style Guides: These documents explain how to implement visual styling as part of the project (e.g. size of images, colors needed, etc.). Style guides are versioned documents, meaning that relevant details are progressively added as necessary considering how the project develops and changes over time.
+Mockups: These documents are PDFs that provide a reference to what your work should look like for a given part of the project. New mockups will be provided as necessary to serve as a reference for the development of the project.
+With the project now introduced, you can dive into today’s exercises.
+
+3. Coffee Shop: Menu HTML Structure
+With your menu now structured in markup, it’s time to iterate on your work and prepare it to be ready for the internet. Your task is to convert your markup menu into the markup language of the web: HTML.
+
+Please use the menu.html file found in the ‘Day 1’ folder to complete this exercise. Copy and paste your original markup work into the menu HTML file. Your menu should meet the following requirements:
+
+Use a level one heading
+Have a navigation bar
+Use an unordered list for your navigation links
+Each navigation link should use an anchor tag
+Use a level two heading to define each section of the menu
+Each item should:
+Have a level three heading for the name of the item
+Use a paragraph tag to display the description and price
+Be sure to properly use semantic tags. If you recall, some semantic tags include:
+
+<header>
+<nav>
+<main>
+<section>
+<footer>
+Use the following mockup as a reference to ensure you have properly structured your HTML document.
+
+Note: Do not style your HTML document with any CSS, simply build the structure. Upcoming exercises will provide details on how to style your menu.
+
+4. Coffee Shop: Landing Page HTML Structure
+With the fundamental components of the menu now created, let’s turn our attention to developing the other component of the site: the landing page.
+
+Using the existing index.html file in the ‘Day 1’ folder and the mockup provided, ensure your landing page has the following structure. Note that there are mentions of adding image tags below. For now, let’s specify the alt text for each image, and leave the URL or src attribute portion blank. We’ll focus on adding these images in a future exercise.
+
+Header & Navigation
+The header must include:
+
+The navigation bar
+A level one heading stating "Nitro Coffee"
+A paragraph tag with the coffee definition
+A button stating "SHOP NOW"
+An empty image tag with the alt text “coffee bag”
+The navigation bar must include:
+
+An empty image tag with the alt text coffee bean logo
+A level two heading stating "nitro"
+An unordered list
+Each item must use an anchor tag
+Our Products Section
+The "Our Products" section must include:
+
+A level two heading with the section name
+A card for each product (Coffee Beans, Cold Brew, In-house Brew)
+Each card will contain:
+An empty image tag with the alt text for each product
+A level three heading with the product name
+A paragraph tag with The price of the product
+A button stating "VIEW ALL"
+Discount Section
+The discount section must include:
+
+A paragraph stating "Get 20% off your first order with code: FirstNitro"
+Footer
+The footer must include:
+
+An “Address” division. This division will contain:
+A level three heading
+Paragraph tags with the Address information
+An “Hours” division. This division will contain:
+A level three heading
+Paragraph tags with the information related to hours of operation
+A “Social division.” This division will contain:
+A level three heading
+An empty image tag with the alt text for each social icon (Facebook, Yelp, Instagram)
+For all the landing page's content, reference the mockup provided.
+
+Remember, when building your HTML structure, be sure to use semantic tags where necessary.
+
+Note: Do not style your HTML document with any CSS, simply build the structure. Upcoming exercises will provide details on how to style your landing page.
+
